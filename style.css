@@ -1,0 +1,59 @@
+.custom-navbar {
+    background-color: #4175cf;
+}
+.navbar-nav .nav-link {
+    color: white;
+    margin-right: 30px;
+}
+.nav-link:hover {
+    background-color: #c5cfe1;
+    color: #007bff;
+}
+.navbar-toggler {
+    background-color: rgb(99, 191, 230) !important; /* Cambia a tu color preferido */
+    border: none; /* Opcional: para quitar el borde */
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.bio-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.bio-section img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.bio-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.bio-section ul li {
+    margin-bottom: 10px;
+}
+
+.card img {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+footer a {
+    margin: 0 10px;
+    color: #007bff;
+    font-size: 24px;
+}
+footer a:hover {
+    color: #0056b3;
+}
