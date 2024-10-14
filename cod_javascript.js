@@ -23,7 +23,7 @@
 		if (totalQuestions > 0) {
 			showQuestion(currentQuestion);
 		} else {
-			document.getElementById("contenidoXML").innerHTML = "<p>Error: No se encontraron preguntas en el archivo XML.</p>";
+			document.getElementById("contenidoXML").innerHTML = "<p>Error en la obtención de preguntas.</p>";
 		}
 	}
 
