@@ -20,7 +20,11 @@
 		const xmlDoc = xml.responseXML;
 		questions = Array.from(xmlDoc.getElementsByTagName("question"));
 		totalQuestions = questions.length;
-		showQuestion(currentQuestion);
+		if (totalQuestions > 0) {
+			showQuestion(currentQuestion);
+		} else {
+			document.getElementById("contenidoXML").innerHTML = "<p>Error: No se encontraron preguntas en el archivo XML.</p>";
+		}
 	}
 
 	function showQuestion(index) {
