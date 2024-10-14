@@ -1,18 +1,9 @@
-<CATALOG>
-    <CD>
-        <TITLE>Empire Burlesque</TITLE>
-        <ARTIST>Bob Dylan</ARTIST>
-        <COUNTRY>USA</COUNTRY>
-        <COMPANY>Columbia</COMPANY>
-        <PRICE>10.90</PRICE>
-        <YEAR>1985</YEAR>
-    </CD>
-    <CD>
-        <TITLE>Hide your heart</TITLE>
-        <ARTIST>Bonnie Tyler</ARTIST>
-        <COUNTRY>UK</COUNTRY>
-        <COMPANY>CBS Records</COMPANY>
-        <PRICE>9.90</PRICE>
-        <YEAR>1988</YEAR>
-    </CD>
-</CATALOG>
+<TEST>
+    <PREGUNTA>
+        <ENUNCIADO>¿Qué respondes?</ENUNCIADO>
+        <RESPUESTA1>Respuesta 1</RESPUESTA1>
+        <RESPUESTA2>Respuesta 2</RESPUESTA2>
+        <RESPUESTA3>Respuesta 3</RESPUESTA3>
+        <RESPUESTA4>Respuesta 4</RESPUESTA4>
+    </PREGUNTA>
+</TEST>
