@@ -18,7 +18,7 @@
 
 	function myFunction(xml) {
 		const xmlDoc = xml.responseXML;
-		questions = Array.from(xmlDoc.getElementsByTagName("question"));
+		questions = Array.from(xmlDoc.getElementsByTagName("PREGUNTA"));
 		totalQuestions = questions.length;
 		if (totalQuestions > 0) {
 			showQuestion(currentQuestion);
@@ -34,8 +34,8 @@
 		}
 
 		const question = questions[index];
-		const text = question.getElementsByTagName("text")[0].childNodes[0].nodeValue;
-		const answers = Array.from(question.getElementsByTagName("answer"));
+		const text = question.getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue;
+		const answers = Array.from(question.getElementsByTagName("RESPUESTA"));
 
 		let form = "<div class='form-group'>";
 		form += "<label for='question'>" + text + "</label>";
