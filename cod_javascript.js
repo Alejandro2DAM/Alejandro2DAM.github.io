@@ -19,16 +19,16 @@ function myFunction(xml) {
 		form += "<div class='form-group'>" +
 		"<label for='question'>" + x[i].getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue + "</label>" + 
 
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value=" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "'>"
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value='" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "'>"
         "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "</label></div>"
 
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qb' value=" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "'>"
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qb' value='" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "'>"
         "<label class='form-check-label' for='qb'>" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "</label></div>"
 
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qc' value=" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "'>"
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qc' value='" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "'>"
         "<label class='form-check-label' for='qc'>" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "</label></div>"
 
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qd' value=" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "'>"
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qd' value='" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "'>"
         "<label class='form-check-label' for='qd'>" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "</label></div>"
 
 		"<button type='submit' class='btn btn-primary'>Comprobar</button>"
