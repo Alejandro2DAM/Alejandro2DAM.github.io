@@ -13,16 +13,27 @@ function loadDoc() {
 
 function myFunction(xml) {
 	const xmlDoc = xml.responseXML;
-	const x = xmlDoc.getElementsByTagName("CD");
-	let table="<tr><th>Artist</th><th>Title</th></tr>";
+	const x = xmlDoc.getElementsByTagName("PREGUNTA");
+	let form;
 	for (let i = 0; i <x.length; i++) { 
-		table += "<tr><td>" +
-		x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
-		"</td><td>" +
-		x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
-		"</td></tr>";
+		form += "<div class='form-group'>" +
+		"<label for='question'>" + x[i].getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue + + "</label>" + 
+
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value=" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "'>"
+        "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "</label></div>"
+
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value=" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "'>"
+        "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "</label></div>"
+
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value=" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "'>"
+        "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "</label></div>"
+
+		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value=" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "'>"
+        "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "</label></div>"
+
+		"<button type='submit' class='btn btn-primary'>Comprobar</button>"
 	}
-	document.getElementById("contenidoXML").innerHTML = table;
+	document.getElementById("contenidoXML").innerHTML = form;
 }
 
 
