@@ -7,7 +7,7 @@ function loadDoc() {
 	xhttp.onload = function() {
 		myFunction(this);
 	}
-	xhttp.open("GET", "cd_catalog.xml");
+	xhttp.open("GET", "test.xml");
 	xhttp.send();
 }
 
