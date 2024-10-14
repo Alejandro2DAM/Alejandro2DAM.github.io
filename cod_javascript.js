@@ -2,39 +2,80 @@
 
 	// Mi código
 
-function loadDoc() {
-	const xhttp = new XMLHttpRequest();
-	xhttp.onload = function() {
-		myFunction(this);
+	let currentQuestion = 0;
+	let score = 0;
+	let totalQuestions = 0;
+	let questions = [];
+
+	function loadDoc() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+			myFunction(this);
+		};
+		xhttp.open("GET", "test.xml");
+		xhttp.send();
 	}
-	xhttp.open("GET", "test.xml");
-	xhttp.send();
-}
 
-function myFunction(xml) {
-	const xmlDoc = xml.responseXML;
-	const x = xmlDoc.getElementsByTagName("PREGUNTA");
-	let form;
-	for (let i = 0; i <x.length; i++) { 
-		form += "<div class='form-group'>" +
-		"<label for='question'>" + x[i].getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue + "</label>" + 
-
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qa' value='" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "'>"
-        "<label class='form-check-label' for='qa'>" + x[i].getElementsByTagName("RESPUESTA1")[0].childNodes[0].nodeValue + "</label></div>"
-
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qb' value='" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "'>"
-        "<label class='form-check-label' for='qb'>" + x[i].getElementsByTagName("RESPUESTA2")[0].childNodes[0].nodeValue + "</label></div>"
-
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qc' value='" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "'>"
-        "<label class='form-check-label' for='qc'>" + x[i].getElementsByTagName("RESPUESTA3")[0].childNodes[0].nodeValue + "</label></div>"
-
-		"<div class='form-check'><input class='form-check-input' type='radio' name='question' id='qd' value='" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "'>"
-        "<label class='form-check-label' for='qd'>" + x[i].getElementsByTagName("RESPUESTA4")[0].childNodes[0].nodeValue + "</label></div>"
-
-		"<button type='submit' class='btn btn-primary'>Comprobar</button>"
+	function myFunction(xml) {
+		const xmlDoc = xml.responseXML;
+		questions = Array.from(xmlDoc.getElementsByTagName("question"));
+		totalQuestions = questions.length;
+		showQuestion(currentQuestion);
 	}
-	document.getElementById("contenidoXML").innerHTML = form;
-}
+
+	function showQuestion(index) {
+		if (index >= totalQuestions) {
+			showResults();
+			return;
+		}
+
+		const question = questions[index];
+		const text = question.getElementsByTagName("text")[0].childNodes[0].nodeValue;
+		const answers = Array.from(question.getElementsByTagName("answer"));
+
+		let form = "<div class='form-group'>";
+		form += "<label for='question'>" + text + "</label>";
+
+		answers.forEach((answer, i) => {
+			form += "<div class='form-check'>";
+			form += "<input class='form-check-input' type='radio' name='question' id='q" + i + "' value='" + (answer.getAttribute('correct') === 'true') + "'>";
+			form += "<label class='form-check-label' for='q" + i + "'>" + answer.childNodes[0].nodeValue + "</label>";
+			form += "</div>";
+		});
+
+		if (index < totalQuestions - 1) {
+			form += "<button type='button' class='btn btn-primary' onclick='nextQuestion()'>Siguiente</button>";
+		} else {
+			form += "<button type='button' class='btn btn-success' onclick='finishQuiz()'>Finalizar</button>";
+		}
+
+		form += "</div>";
+		document.getElementById("contenidoXML").innerHTML = form;
+	}
+
+	function nextQuestion() {
+		const selected = document.querySelector('input[name="question"]:checked');
+		if (selected && selected.value === 'true') {
+			score++;
+		}
+		currentQuestion++;
+		showQuestion(currentQuestion);
+	}
+
+	function finishQuiz() {
+		const selected = document.querySelector('input[name="question"]:checked');
+		if (selected && selected.value === 'true') {
+			score++;
+		}
+		showResults();
+	}
+
+	function showResults() {
+		const finalScore = (score / totalQuestions) * 10;
+		document.getElementById("contenidoXML").innerHTML = "<h2>Resultados del examen</h2><p>Tu puntuación es: " + finalScore.toFixed(2) + " / 10</p>";
+	}
+
+	window.onload = loadDoc;
 
 
 
