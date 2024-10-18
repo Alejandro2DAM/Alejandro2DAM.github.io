@@ -42,7 +42,16 @@
 			});
 		});*/
 
-		respuestasCorrectas[0] = "undefined";
+		Array.from(x).forEach((p) => {
+            const respuestas = p.getElementsByTagName("RESPUESTA");
+            Array.from(respuestas).forEach((r) => {
+                if (r.getAttribute("correct") === "true") {
+                    respuestasCorrectas.push(r.textContent);
+                }
+            });
+        });
+
+		/*respuestasCorrectas[0] = "undefined";
 		respuestasCorrectas[1] = "push";
 		respuestasCorrectas[2] = "===";
 		respuestasCorrectas[3] = "function myFunction()";
@@ -51,7 +60,7 @@
 		respuestasCorrectas[6] = "break";
 		respuestasCorrectas[7] = "getElementById";
 		respuestasCorrectas[8] = "parseInt";
-		respuestasCorrectas[9] = "try...catch";
+		respuestasCorrectas[9] = "try...catch";*/
 
 		tamanio = x.length;
 		
