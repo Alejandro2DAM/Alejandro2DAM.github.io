@@ -22,20 +22,36 @@
 	  }
 
 	function myFunction(xml) {
+
+		document.getElementById("botonInicio").hidden = true;
+
 		const xmlDoc = xml.responseXML;
 		x = xmlDoc.getElementsByTagName("PREGUNTA");
 		
-		x.forEach((p) => {
-			let temp = p.getElementsByTagName("RESPUESTA");
+		/*Array.from(x).forEach((p) => {
+			var temp = [];
+			temp = p.getElementsByTagName("RESPUESTA");
 
-			temp.forEach((r) => {
-				let temp2 = r.getAttribute("correct");
+			Array.from(temp).forEach((r) => {
+				var temp2 = [];
+				temp2 = r.getAttribute("correct");
 	
 				if(temp2){
 					respuestasCorrectas.push(r.value);
 				}
 			});
-		});
+		});*/
+
+		respuestasCorrectas[0] = "undefined";
+		respuestasCorrectas[1] = "push";
+		respuestasCorrectas[2] = "===";
+		respuestasCorrectas[3] = "function myFunction()";
+		respuestasCorrectas[4] = "define";
+		respuestasCorrectas[5] = "length";
+		respuestasCorrectas[6] = "break";
+		respuestasCorrectas[7] = "getElementById";
+		respuestasCorrectas[8] = "parseInt";
+		respuestasCorrectas[9] = "try...catch";
 
 		tamanio = x.length;
 		
@@ -97,7 +113,7 @@
 			form += "<button type='button' onclick='finalizar()'>Finalizar</button>";
 		}
 	  
-		form += "<p>Índice: " + indice + "</p>";
+		/*form += "<p>Índice: " + indice + "</p>";
 		
 		form += "<p>Tamaño array respuestas: " + respuestas.length + "</p>";
 		
@@ -107,9 +123,9 @@
 		  form += index + " " + r + "<br>";
 		});
 	  
-		form += "</p>";
+		form += "</p>";*/
 		
-		document.getElementById("demo").innerHTML = form;
+		document.getElementById("contenidoXML").innerHTML = form;
 		
 		let aux = document.querySelectorAll('input[name="RESPUESTA"]');
 	  
@@ -118,8 +134,8 @@
 			  r.checked = true;
 		  }
 		});
-	  }
-	  function cambiarPregunta(tamanio,opcion) {
+	}
+	function cambiarPregunta(tamanio,opcion) {
 	  
 		let respuestaSeleccionada = document.querySelector('input[name="RESPUESTA"]:checked');
 		
@@ -156,24 +172,48 @@
 		  // code block
 		 
 		}
-	  }
-	  function finalizar(){
-		  fin = true;
-		  mostrar();
-	  }
-	  function mostrarResultados(){
-		  respuestas.forEach((r, indiceR) => {
-			if(r.value === respuestasCorrectas[indiceR]){
-				puntuacion += 1;
-			}
-			});
-		  var textoFin = "Número de respuestas acertadas: " + puntuacion + "/" + tamanio
-		  textoFin += "<br>Puntuación: " + (puntuacion * 10 / tamanio).toFixed(2) + " / 10.00"
-		  document.getElementById("demo").innerHTML = textoFin;
-	  }
+	}
+	function finalizar(){
+		let respuestaSeleccionada = document.querySelector('input[name="RESPUESTA"]:checked');
+		
+		if(respuestaSeleccionada){
+			respuestas[indice] = respuestaSeleccionada.value;
+		}
+		else{
+			respuestas[indice] = "No se ha seleccionada nada";
+		}
 
+		fin = true;
+		mostrar();
+	}
+	function mostrarResultados(){
 
+		var textoFin = "";
 
+		respuestas.forEach((r, indiceR) => {
+		if(r === respuestasCorrectas[indiceR]){
+			puntuacion += 1;
+		}
+		//textoFin += "<br>Respuesta marcada " + indiceR + ": " + r + ".   Respuesta correcta: " + respuestasCorrectas[indiceR] + "<br>";
+		});
+
+		textoFin += "<div class='container mt-5'>";
+		textoFin +=      "<div class='card custom-card h-200'>";
+		textoFin +=		    "<div class='card-body'>";
+		textoFin +=		    "<h5 class='card-title'>Resultados del test</h5>";
+		textoFin +=		    "<p class='card-text'>Número de respuestas acertadas: " + puntuacion + "/" + tamanio + "</p>";
+		textoFin +=		    "<p class='card-text'>Puntuación: " + (puntuacion * 10 / tamanio).toFixed(2) + " / 10.00</p>";
+		//textoFin +=			"<button id='botonComprobar' class='btn btn-primary' onclick='comprobar()'>Comprobar</button>"
+		textoFin +=		    "</div>";
+		textoFin +=	     "</div>";
+		textoFin += "</div>";
+
+		document.getElementById("contenidoXML").innerHTML = textoFin;
+	}
+
+	/*function comprobar(){
+		document.getElementById("contenidoXML").innerHTML = "HOLA";
+	}*/
 
 
 
