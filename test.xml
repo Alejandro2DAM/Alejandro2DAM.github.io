@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TEST>
-    <PREGUNTA id="1">
+    <PREGUNTA>
         <ENUNCIADO>¿Cuál es el tipo de datos de una variable declarada con var en JavaScript?</ENUNCIADO>
         <RESPUESTA correct="true">undefined</RESPUESTA>
         <RESPUESTA>string</RESPUESTA>
         <RESPUESTA>number</RESPUESTA>
         <RESPUESTA>boolean</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="2">
+    <PREGUNTA>
         <ENUNCIADO>¿Qué método se usa para agregar un elemento al final de un array en JavaScript?</ENUNCIADO>
         <RESPUESTA>shift</RESPUESTA>
         <RESPUESTA>unshift</RESPUESTA>
         <RESPUESTA correct="true">push</RESPUESTA>
         <RESPUESTA>pop</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="3">
+    <PREGUNTA>
         <ENUNCIADO>¿Cuál es el operador que se usa para comparar valores y tipos de datos en JavaScript?</ENUNCIADO>
         <RESPUESTA>=</RESPUESTA>
         <RESPUESTA correct="true">===</RESPUESTA>
         <RESPUESTA>==</RESPUESTA>
         <RESPUESTA>!=</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="4">
+    <PREGUNTA>
         <ENUNCIADO>¿Cómo se declara una función en JavaScript?</ENUNCIADO>
         <RESPUESTA>declare myFunction()</RESPUESTA>
         <RESPUESTA>function: myFunction()</RESPUESTA>
         <RESPUESTA>func myFunction()</RESPUESTA>
         <RESPUESTA correct="true">function myFunction()</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="5">
+    <PREGUNTA>
         <ENUNCIADO>¿Cuál de las siguientes no es una palabra reservada en JavaScript?</ENUNCIADO>
         <RESPUESTA>default</RESPUESTA>
         <RESPUESTA>catch</RESPUESTA>
         <RESPUESTA>throw</RESPUESTA>
         <RESPUESTA correct="true">define</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="6">
+    <PREGUNTA>
         <ENUNCIADO>¿Qué propiedad se usa para obtener la longitud de un array en JavaScript?</ENUNCIADO>
         <RESPUESTA>size</RESPUESTA>
         <RESPUESTA>length()</RESPUESTA>
         <RESPUESTA correct="true">length</RESPUESTA>
         <RESPUESTA>count</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="7">
+    <PREGUNTA>
         <ENUNCIADO>¿Qué instrucción se usa para detener un bucle en JavaScript?</ENUNCIADO>
         <RESPUESTA correct="true">break</RESPUESTA>
         <RESPUESTA>stop</RESPUESTA>
         <RESPUESTA>end</RESPUESTA>
         <RESPUESTA>exit</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="8">
+    <PREGUNTA>
         <ENUNCIADO>¿Cuál de los siguientes métodos selecciona un elemento por su id en JavaScript?</ENUNCIADO>
         <RESPUESTA>getElementByName</RESPUESTA>
         <RESPUESTA correct="true">getElementById</RESPUESTA>
         <RESPUESTA>querySelector</RESPUESTA>
         <RESPUESTA>getElementByClassName</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="9">
+    <PREGUNTA>
         <ENUNCIADO>¿Cómo se convierte un string a un número entero en JavaScript?</ENUNCIADO>
         <RESPUESTA correct="true">parseInt</RESPUESTA>
         <RESPUESTA>convertToInt</RESPUESTA>
         <RESPUESTA>toInteger</RESPUESTA>
         <RESPUESTA>parseInteger</RESPUESTA>
     </PREGUNTA>
-    <PREGUNTA id="10">
+    <PREGUNTA>
         <ENUNCIADO>¿Qué objeto se usa para manejar errores en JavaScript?</ENUNCIADO>
         <RESPUESTA>ErrorEvent</RESPUESTA>
         <RESPUESTA>Exception</RESPUESTA>

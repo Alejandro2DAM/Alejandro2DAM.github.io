@@ -2,92 +2,175 @@
 
 	// Mi código
 
-	let currentQuestion = 0;
-	let score = 0;
-	let totalQuestions = 0;
-	let questions = [];
 
+	var indice = 0;
+	var tamanio = 0;
+	var respuestas = [];
+	var respuestasCorrectas = [];
+	var puntuacion = 0;
+	var fin = false;
+	var x;
+	
 	function loadDoc() {
+		fin = false;
 		const xhttp = new XMLHttpRequest();
 		xhttp.onload = function() {
-			myFunction(this);
-		};
+		  myFunction(this);
+		}
 		xhttp.open("GET", "test.xml");
 		xhttp.send();
-	}
+	  }
 
 	function myFunction(xml) {
 		const xmlDoc = xml.responseXML;
-		questions = Array.from(xmlDoc.getElementsByTagName("PREGUNTA"));
-		totalQuestions = questions.length;
-		if (totalQuestions > 0) {
-			showQuestion(currentQuestion);
-		} else {
-			document.getElementById("contenidoXML").innerHTML = "<p>Error en la obtención de preguntas.</p>";
-		}
-	}
+		x = xmlDoc.getElementsByTagName("PREGUNTA");
+		
+		x.forEach((p) => {
+			let temp = p.getElementsByTagName("RESPUESTA");
 
-	function showQuestion(index) {
-		if (index >= totalQuestions) {
-			showResults();
-			return;
-		}
-
-		const question = questions[index];
-		const text = question.getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue;
-		const answers = Array.from(question.getElementsByTagName("RESPUESTA"));
-
-		let form = "<div class='form-group'>";
-		form += "<label for='question'>" + text + "</label>";
-
-		answers.forEach((answer, i) => {
-			form += "<div class='form-check'>";
-			form += "<input class='form-check-input' type='radio' name='question' id='q" + i + "' value='" + (answer.getAttribute('correct') === 'true') + "'>";
-			form += "<label class='form-check-label' for='q" + i + "'>" + answer.childNodes[0].nodeValue + "</label>";
-			form += "</div>";
+			temp.forEach((r) => {
+				let temp2 = r.getAttribute("correct");
+	
+				if(temp2){
+					respuestasCorrectas.push(r.value);
+				}
+			});
 		});
 
-		if (index < totalQuestions - 1) {
-			form += "<button type='button' class='btn btn-primary' onclick='nextQuestion()'>Siguiente</button>";
-		} else {
-			form += "<button type='button' class='btn btn-success' onclick='finishQuiz()'>Finalizar</button>";
+		tamanio = x.length;
+		
+		mostrar();
+	}
+
+	function mostrar(){
+		if(fin){
+			mostrarResultados();
+		}else{
+			mostrarPregunta(indice)
 		}
-
-		form += "</div>";
-		document.getElementById("contenidoXML").innerHTML = form;
 	}
 
-	function nextQuestion() {
-		const selected = document.querySelector('input[name="question"]:checked');
-		if (selected && selected.value === 'true') {
-			score++;
+	function mostrarPregunta(indice) {
+		let form = "<div class='card'>";
+		form += "<div class='card-body'>";
+		form += "<h5 class='card-title'>";
+		form += "Pregunta " + (indice + 1) + ": " + x[indice].getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue;
+		form += "</h5>";
+		
+		form += "<form><div class='form-check'>";
+		
+		form += "<input class='form-check-input' type='radio' name='RESPUESTA' id='q1' value='";
+			form += x[indice].getElementsByTagName("RESPUESTA")[0].childNodes[0].nodeValue + "'>";
+		form += "<label class='form-check-label' for='q1'>"
+			form += x[indice].getElementsByTagName("RESPUESTA")[0].childNodes[0].nodeValue + "</label>";
+		form += "<br>";
+		
+		form += "<input class='form-check-input' type='radio' name='RESPUESTA' id='q2' value='";
+			form += x[indice].getElementsByTagName("RESPUESTA")[1].childNodes[0].nodeValue + "'>";
+		form += "<label class='form-check-label' for='q2'>"
+			form += x[indice].getElementsByTagName("RESPUESTA")[1].childNodes[0].nodeValue + "</label>";
+		form += "<br>";
+		
+		form += "<input class='form-check-input' type='radio' name='RESPUESTA' id='q3' value='";
+			form += x[indice].getElementsByTagName("RESPUESTA")[2].childNodes[0].nodeValue + "'>";
+		form += "<label class='form-check-label' for='q3'>"
+			form += x[indice].getElementsByTagName("RESPUESTA")[2].childNodes[0].nodeValue + "</label>";
+		form += "<br>";
+		
+		form += "<input class='form-check-input' type='radio' name='RESPUESTA' id='q4' value='";
+			form += x[indice].getElementsByTagName("RESPUESTA")[3].childNodes[0].nodeValue + "'>";
+		form += "<label class='form-check-label' for='q4'>"
+			form += x[indice].getElementsByTagName("RESPUESTA")[3].childNodes[0].nodeValue + "</label>";
+		form += "<br>"; 
+		
+		form += "</div></form>";
+		form += "</div></div>";
+		
+		form += "<br>";
+		
+		form += "<button type='button' onclick='cambiarPregunta(tamanio, 1)'>Anterior</button>";
+		
+		if(indice < tamanio - 1){
+			form += "<button type='button' onclick='cambiarPregunta(tamanio, 2)'>Siguiente</button>";
 		}
-		currentQuestion++;
-		showQuestion(currentQuestion);
-	}
-
-	function finishQuiz() {
-		const selected = document.querySelector('input[name="question"]:checked');
-		if (selected && selected.value === 'true') {
-			score++;
+		else{
+			form += "<button type='button' onclick='finalizar()'>Finalizar</button>";
 		}
-		showResults();
-	}
-
-	function showResults() {
-		const finalScore = (score / totalQuestions) * 10;
-		document.getElementById("contenidoXML").innerHTML = "<h2>Resultados del examen</h2><p>Tu puntuación es: " + finalScore.toFixed(2) + " / 10</p>";
-	}
-
-	window.onload = loadDoc;
-
-
-
-
-
-
-
-
+	  
+		form += "<p>Índice: " + indice + "</p>";
+		
+		form += "<p>Tamaño array respuestas: " + respuestas.length + "</p>";
+		
+		form += "<p id='idPrueba'>";
+		
+		respuestas.forEach(function(r, index) {
+		  form += index + " " + r + "<br>";
+		});
+	  
+		form += "</p>";
+		
+		document.getElementById("demo").innerHTML = form;
+		
+		let aux = document.querySelectorAll('input[name="RESPUESTA"]');
+	  
+		aux.forEach((r) => {
+		  if(r.value === respuestas[indice]){
+			  r.checked = true;
+		  }
+		});
+	  }
+	  function cambiarPregunta(tamanio,opcion) {
+	  
+		let respuestaSeleccionada = document.querySelector('input[name="RESPUESTA"]:checked');
+		
+		if(respuestaSeleccionada){
+			respuestas[indice] = respuestaSeleccionada.value;
+		}
+		else{
+			respuestas[indice] = "No se ha seleccionada nada";
+		}
+	  
+		/*if (opcion === 1){
+			indice -= 1;
+		  loadDoc();
+		}
+		else if (opcion === 2){
+		  indice += 1;
+		  loadDoc();
+		}*/
+		
+		switch(opcion) {
+		case 1:
+		  if(indice > 0){
+			  indice -= 1;
+		  }
+		  loadDoc();
+		  break;
+		case 2:
+		  if(indice < tamanio - 1){
+			  indice += 1;
+		  }
+		  loadDoc();
+		  break;
+		//default:
+		  // code block
+		 
+		}
+	  }
+	  function finalizar(){
+		  fin = true;
+		  mostrar();
+	  }
+	  function mostrarResultados(){
+		  respuestas.forEach((r, indiceR) => {
+			if(r.value === respuestasCorrectas[indiceR]){
+				puntuacion += 1;
+			}
+			});
+		  var textoFin = "Número de respuestas acertadas: " + puntuacion + "/" + tamanio
+		  textoFin += "<br>Puntuación: " + (puntuacion * 10 / tamanio).toFixed(2) + " / 10.00"
+		  document.getElementById("demo").innerHTML = textoFin;
+	  }
 
 
 
