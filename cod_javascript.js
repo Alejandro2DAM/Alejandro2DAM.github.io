@@ -99,13 +99,15 @@
 		
 		form += "<br>";
 		
-		form += "<button type='button' onclick='cambiarPregunta(tamanio, 1)'>Anterior</button>";
-		
+		form += "&nbsp&nbsp";
+		form += "<button class='btn btn-primary' onclick='cambiarPregunta(tamanio, 1)'>Anterior</button>";
+		form += "&nbsp&nbsp";
+
 		if(indice < tamanio - 1){
-			form += "<button type='button' onclick='cambiarPregunta(tamanio, 2)'>Siguiente</button>";
+			form += "<button class='btn btn-primary' onclick='cambiarPregunta(tamanio, 2)'>Siguiente</button>";
 		}
 		else{
-			form += "<button type='button' onclick='finalizar()'>Finalizar</button>";
+			form += "<button class='btn btn-primary' onclick='finalizar()'>Finalizar</button>";
 		}
 	  
 		/*form += "<p>Índice: " + indice + "</p>";
@@ -238,14 +240,18 @@
 			}
 
 			textoComprobar += "</p>";
-		});
+		});	
 
 		textoComprobar +=		    "</div>";
 		textoComprobar +=	     "</div>";
 		textoComprobar += "</div>";
 
-		textoComprobar += "<button type='button' onclick='cambiarMuestra(1)'>Anterior</button>";
-		textoComprobar += "<button type='button' onclick='cambiarMuestra(2)'>Siguiente</button>";
+		textoComprobar += "<br>"
+
+		textoComprobar += "&nbsp&nbsp";
+		textoComprobar += "<button class='btn btn-primary' onclick='cambiarMuestra(1)'>Anterior</button>";
+		textoComprobar += "&nbsp&nbsp";
+		textoComprobar += "<button class='btn btn-primary' onclick='cambiarMuestra(2)'>Siguiente</button>";
 
 		document.getElementById("contenidoXML").innerHTML = textoComprobar;
 	}
