@@ -27,20 +27,6 @@
 
 		const xmlDoc = xml.responseXML;
 		x = xmlDoc.getElementsByTagName("PREGUNTA");
-		
-		/*Array.from(x).forEach((p) => {
-			var temp = [];
-			temp = p.getElementsByTagName("RESPUESTA");
-
-			Array.from(temp).forEach((r) => {
-				var temp2 = [];
-				temp2 = r.getAttribute("correct");
-	
-				if(temp2){
-					respuestasCorrectas.push(r.value);
-				}
-			});
-		});*/
 
 		Array.from(x).forEach((p) => {
             const respuestas = p.getElementsByTagName("RESPUESTA");
@@ -71,11 +57,11 @@
 		if(fin){
 			mostrarResultados();
 		}else{
-			mostrarPregunta(indice)
+			mostrarPregunta()
 		}
 	}
 
-	function mostrarPregunta(indice) {
+	function mostrarPregunta() {
 		let form = "<div class='card'>";
 		form += "<div class='card-body'>";
 		form += "<h5 class='card-title'>";
@@ -212,17 +198,86 @@
 		textoFin +=		    "<h5 class='card-title'>Resultados del test</h5>";
 		textoFin +=		    "<p class='card-text'>Número de respuestas acertadas: " + puntuacion + "/" + tamanio + "</p>";
 		textoFin +=		    "<p class='card-text'>Puntuación: " + (puntuacion * 10 / tamanio).toFixed(2) + " / 10.00</p>";
-		//textoFin +=			"<button id='botonComprobar' class='btn btn-primary' onclick='comprobar()'>Comprobar</button>"
+		textoFin +=			"<button id='botonComprobar' class='btn btn-primary' onclick='mostrarCorreccion()'>Comprobar</button>"
 		textoFin +=		    "</div>";
 		textoFin +=	     "</div>";
 		textoFin += "</div>";
 
+		indice = 0;
+
 		document.getElementById("contenidoXML").innerHTML = textoFin;
 	}
+	function mostrarCorreccion(){
 
-	/*function comprobar(){
-		document.getElementById("contenidoXML").innerHTML = "HOLA";
-	}*/
+		var textoComprobar = "";
+
+		textoComprobar += "<div class='container mt-5'>";
+		textoComprobar +=      "<div class='card custom-card h-200'>";
+		textoComprobar +=		    "<div class='card-body'>";
+		textoComprobar +=		    "<h5 class='card-title'>Pregunta " + (indice + 1) + ": " + x[indice].getElementsByTagName("ENUNCIADO")[0].childNodes[0].nodeValue + "</h5>";
+
+		const respuestasTemp = x[indice].getElementsByTagName("RESPUESTA");
+		const respuestaUsuario = respuestas[indice];
+		const respuestaCorrecta = respuestasCorrectas[indice];
+
+		Array.from(respuestasTemp).forEach((r) => {
+			textoComprobar += "<p class='card-text'> - ";
+
+			// Añadir la respuesta actual al texto
+			textoComprobar += r.childNodes[0].nodeValue;
+
+			// Marcar la respuesta correcta y la respuesta del usuario
+			if (r.childNodes[0].nodeValue === respuestaCorrecta) {
+				textoComprobar += " (Correcta)";
+			}
+
+			if (r.childNodes[0].nodeValue === respuestaUsuario) {
+				if (r.childNodes[0].nodeValue !== respuestaCorrecta) {
+					textoComprobar += " (Marcada)";
+				}
+			}
+
+			textoComprobar += "</p>";
+		});
+
+		textoComprobar +=		    "</div>";
+		textoComprobar +=	     "</div>";
+		textoComprobar += "</div>";
+
+		textoComprobar += "<button type='button' onclick='cambiarMuestra(1)'>Anterior</button>";
+		textoComprobar += "<button type='button' onclick='cambiarMuestra(2)'>Siguiente</button>";
+
+		document.getElementById("contenidoXML").innerHTML = textoComprobar;
+	}
+	function cambiarMuestra(op){
+		switch(op) {
+			case 1:
+			  if(indice > 0){
+				  indice -= 1;
+			  }
+			  mostrarCorreccion();
+			  break;
+			case 2:
+			  if(indice < tamanio - 1){
+				  indice += 1;
+			  }
+			  mostrarCorreccion();
+			  break;
+			//default:
+			  // code block
+			 
+			}
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -322,7 +377,7 @@
 		cad += "\nEmail: " + document.getElementById('email').value;
 		cad += "\nCod Postal: " + document.getElementById('codpostal').value;		
 		cad += "\nSexo: " +  getTxtSexo();//document.getElementsByName('sexo')[0].value;
-		//.getElementById('sexo').value;	
+		//.getElementById('sexo').value;
 	    //cad += "\nCapturas carnet alberguista: " + document.getElementById('files').value;				
 		cad += "\nFecha 1a visita: " + document.getElementById('fechavis').value;				
 		cad += "\nHora 1a visita: " + document.getElementById('timecontrolvis').value;				
@@ -336,7 +391,6 @@
 		cad += "\nFecha actual: " + document.getElementById('fechaactual').value;
 		alert(cad);
 	}
-	
 	
 	function obtenerFechaActual() {	
 		var d = new Date();
